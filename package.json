@@ -1,0 +1,10 @@
+{
+    "name": "JDM-dico",
+    "description": "JDM-dico Node.js server",
+    "version": "0.0.1",
+    "author": "Pierre Cavalet",
+    "dependencies": {
+        "fs": "*",
+        "express": "*"
+    }
+}
