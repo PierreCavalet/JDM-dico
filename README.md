@@ -11,3 +11,7 @@ Le serveur Node.js a deux rôles:
 
 ### Le client Angular.js
 Le client Angular.js consommera l'API RESTful mise à disposition par le serveur Node.js. Il affiche ensuite ces données via des templates. Ces templates utiliseront bootstrap pour gérer le responsive design.
+
+### API jeuxdemots
+
+- accéder aux infos du mot chat : http://www.jeuxdemots.org/rezo-xml.php?gotermsubmit=Chercher&gotermrel=chat 
