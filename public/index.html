@@ -10,7 +10,10 @@
 	<script>
 		var app = angular.module('app', ['ngRoute']);
 
-		app.controller('controller', function($scope) {
+		app.controller('controller', function($scope, $http) {
+			$http.get('http://localhost:8888/test').then(function(response) {
+				console.log("response" + response.data);
+			});
 			$scope.test = "Test";
 		});
 		app.config(['$routeProvider', function($routeProvider) {
