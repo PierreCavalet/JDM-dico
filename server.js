@@ -1,6 +1,5 @@
 var express = require('express');
 var fs = require('fs');
-var parser = require('xml2json');
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
