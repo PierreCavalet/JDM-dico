@@ -1,2 +1,5 @@
 # Dependency directory
 node_modules
+
+# host, username and password
+secret.json
