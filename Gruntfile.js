@@ -7,12 +7,12 @@ module.exports = function(grunt) {
         sshexec: {
             deploy: {
                 command: [
-                    'cd /root/',
-                    'rm -r jeuxdemots/',
+                    'cd ~',
+                    'rm -r jeuxdemots/ || true',
                     'git clone git@github.com:PierreCavalet/JDM-dico.git jeuxdemots',
                     'cd jeuxdemots',
                     'npm install',
-                    'forever stop server.js',
+                    'forever stop server.js || true',
                     'forever start server.js',
                     'forever list'
                 ].join(' && '),
