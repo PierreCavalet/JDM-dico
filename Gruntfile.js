@@ -4,13 +4,13 @@ module.exports = function(grunt) {
         // deploy
         secret: grunt.file.readJSON('secret.json'),
 
-
         sshexec: {
             deploy: {
                 command: [
                     'cd /root/',
                     'rm -r jeuxdemots/',
-                    'git clone git@github.com:PierreCavalet/JDM-dico.git',
+                    'git clone git@github.com:PierreCavalet/JDM-dico.git jeuxdemots',
+                    'cd jeuxdemots',
                     'npm install',
                     'forever stop server.js',
                     'forever start server.js',
