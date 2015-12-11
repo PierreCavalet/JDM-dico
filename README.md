@@ -14,4 +14,21 @@ Le client Angular.js consommera l'API RESTful mise à disposition par le serveur
 
 ### API jeuxdemots
 
-- accéder aux infos du mot chat : http://www.jeuxdemots.org/rezo-xml.php?gotermsubmit=Chercher&gotermrel=chat 
+- accéder aux infos du mot chat : http://www.jeuxdemots.org/rezo-xml.php?gotermsubmit=Chercher&gotermrel=chat
+
+## Déploiement de l'application
+
+- créer un fichier `secret.json` de la frome suivante :
+
+```
+{
+    "host" : "IP ou domaine de l'host",
+    "username" : "username",
+    "password" : "password"
+}
+
+```
+
+puis lancer la commande suivante : `grunt deploy`
+
+Félicitation, vous avez deployé votre application !
