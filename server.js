@@ -7,7 +7,12 @@ app.use(express.static(__dirname + "/public"));
 
 app.get('/test', function(req, res) {
 	var readable = fs.createReadStream('chat.xml');
-	readable.on('open', function() { readable.pipe(res); });
+	var xml = '';
+	readable.on('readable', function() {
+	    while ((chunk=readable.read()) != null) {
+	        xml += chunk;
+	    }
+	});
 	readable.on('error', function() { res.end("[]"); });
 });
 
