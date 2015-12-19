@@ -11,10 +11,15 @@
 		var app = angular.module('app', ['ngRoute']);
 
 		app.controller('controller', function($scope, $http) {
-			$http.get('http://localhost:8888/test').then(function(response) {
-				console.log("response" + response.data);
+			var jsonRelations;
+			$http.get('/relations.json').then(function(response) {
+				jsonRelations = response.data;
 			});
-			$scope.test = "Test";
+			$http.get('/test').then(function(response) {
+				jsonWord = response.data;
+				console.log(jsonWord);
+				$scope.name = jsonWord["mot-formate"][0];
+			});
 		});
 		app.config(['$routeProvider', function($routeProvider) {
 			$routeProvider
