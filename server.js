@@ -1,28 +1,41 @@
+
+// modules =====================================================================
 var express = require('express');
+var app = express();
+var mongoose = require('mongoose');
 var fs = require('fs');
 var xml2js = require('xml2js');
-var app = express();
 
-app.use(express.static(__dirname + "/public"));
 
-var parser = new xml2js.Parser();
-app.get('/test', function(req, res) {
-	fs.readFile(__dirname + '/chat2.xml', function(err, data) {
-	    parser.parseString(data, function (err, result) {
-			// mettre au propre le json
-			var JSONdata = result.jdm;
-			JSONdata.entrant = JSONdata.entrant[0].rel;
-			JSONdata.sortant = JSONdata.sortant[0].rel;
-			JSONdata.mot = JSONdata.mot[0]._;
-			JSONdata.def = JSONdata.def[0]._;
-			JSONdata.motformate = JSONdata['mot-formate'][0];
-			delete JSONdata['mot-formate'];
+// configuration ===============================================================
 
-			// envoie du json
-	        res.end(JSON.stringify(JSONdata));
-	        console.log('Done');
-	    });
-	});
+// config files
+var db = require('./app/config/db');
+
+// set the port
+var port = process.env.port || 8888;
+
+// connect to mongoDB database
+var connection = mongoose.connect(db.url);
+
+// set the static files location
+app.use(express.static(__dirname + '/public'));
+
+// routes
+var words = require('./app/routes/words');
+app.use('/api', words);
+
+// front end routes for angular
+app.get('*', function(req, res) {
+    res.sendfile('./public/index.html');
 });
 
-app.listen(8888);
+// start application ===========================================================
+app.listen(port);
+console.log('The application is running');
+
+//
+// var parser = new xml2js.Parser();
+// app.get('/word', function(req, res) {
+//
+// });

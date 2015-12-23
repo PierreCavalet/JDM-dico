@@ -1,5 +1,8 @@
-# Dependency directory
+# npm dependencies
 node_modules
+
+# bower dependencies
+public/libs
 
 # host, username and password
 secret.json
