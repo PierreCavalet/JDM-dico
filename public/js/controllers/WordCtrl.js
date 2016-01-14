@@ -1,41 +1,72 @@
-angular.module('WordCtrl', []).controller('WordController', ['$scope',
- '$rootScope', '$http','$routeParams',
-  function($scope, $rootScope, $http, $routeParams) {
+angular.module('WordCtrl', []).controller('WordController', ['$scope','$rootScope',
+ '$http','$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
-    var jsonRelations;
-    componentHandler.upgradeDom();
+  $rootScope.showBar = true;
+  $rootScope.showError = false;
+  componentHandler.upgradeDom();
+
+  // relation title
+  var jsonRelations;
 	$http.get('/relations.json').then(function(response) {
 		jsonRelations = response.data;
 	});
-    $rootScope.showBar = true;
+
+  // accessing the API
 	$http.get('/api/words/' + $routeParams.word).then(function(response) {
 		jsonWord = response.data;
+    // if there is an error, hide the bar and display the error
+    if (jsonWord.error) {
+      $rootScope.showBar = false;
+      $rootScope.showError = true;
 
-        console.log(jsonWord);
-        $rootScope.mot = $routeParams.word;
-        var association = [];
-        angular.forEach(jsonWord.entrant, function(value, key) {
-            if(typeof association[value.association.type] === 'undefined'){
-                association[value.association.type] = [];
-            };
-          association[value.association.type].push(value.mot);
-        });
+      // error message handling
+      if (jsonWord.error == "PARSINGERROR") {
+        $scope.error = "Problème lors du parsing de l'XML (XML non valide)";
+      } else if (jsonWord.error == "TIMEOUT") {
+        $scope.error = "Délai d'attente dépassé";
+      }
+    } else {
+      var association = [];
 
-        $rootScope.showBar = false;
-        $scope.cards = [];
-        for (var key in association) {
-            $scope.cards.push({
-                "title" : jsonRelations[key] || "Relation non définie",
-                "data" : association[key],
-                "show" : true
-            });
+      // relations management
+      angular.forEach(jsonWord.entrant, function(value, key) {
+        if(typeof association[value.association.type] === 'undefined') {
+          association[value.association.type] = [];
         }
+        association[value.association.type].push(value.mot);
+      });
+      angular.forEach(jsonWord.sortant, function(value, key) {
+        if(typeof association[value.association.type] === 'undefined') {
+          association[value.association.type] = [];
+        }
+        association[value.association.type].push(value.mot);
+      });
+
+      // hide the bar and push the cards
+      $rootScope.showBar = false;
+      $scope.cards = [];
+      for (var key in association) {
+        console.log((jsonRelations[key] || "Relation non définie") + " : ");
+        console.log(association[key]);
+        $scope.cards.push({
+          "title" : jsonRelations[key] || "Relation non définie",
+          "data" : association[key],
+          "limit" : 10,
+          "show" : true
+        });
+      }
+    }
 	});
 
-    $scope.tagline = 'Nothing beats a pocket protector!';
+  $scope.delete = function(card) {
+    var i = $scope.cards.indexOf(card);
+    if(i != -1) {
+    	$scope.cards.splice(i, 1);
+    }
+  };
 
-    $scope.delete = function(card) {
-        return card.show = false;
-    };
+  $scope.incrLimit = function(card) {
+    card.limit = card.limit + 10;
+  }
 
 }]);

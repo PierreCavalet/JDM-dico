@@ -26,7 +26,11 @@ exports.getWord = function(req, res) {
             var url = 'http://www.jeuxdemots.org/rezo-xml.php?gotermsubmit=Chercher&output=onlyxml&gotermrel=' + word_mot;
 
             // request with no encoding so the result is a buffer
-            request({uri : url, encoding :  null}, function (error, response, body) {
+            request({uri : url, encoding :  null, timeout: 7000}, function (error, response, body) {
+                if (error) {
+                    res.json({ "error" : "TIMEOUT"});
+                    return;
+                }
                 // convert from iso-8859-1 to utf-8
                 var iconv = new Iconv('iso-8859-1', 'utf-8');
                 var buffDecode = iconv.convert(body);
@@ -44,7 +48,7 @@ exports.getWord = function(req, res) {
                     // parse xml to json
                     parser.parseString(xmlToParse, function (err, result) {
                         if (err) {
-                            console.log(err);
+                            res.json({ "error" : "PARSINGERROR"});
                             return;
                         }
 

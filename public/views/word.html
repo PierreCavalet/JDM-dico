@@ -1,28 +1,31 @@
 <div class="jumbotron text-center">
-    <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" ng-class="{'v': showBar,'h':!showBar}"></div>
-    <div class="mdl-grid">
-        <div ng-repeat="card in cards" class="mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <div class="demo-card-square mdl-card mdl-shadow--2dp card-relation" ng-show="card.show">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text darkBlue">{{ card.title }}</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    <div ng-repeat="word in card.data | limitTo: 10">
-                        <span id="word">{{ word }}</span>
-                    </div>
-                </div>
-                <div class="mdl-card--expand"></div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ">
-                        See more
-                    </a>
-                </div>
-                <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" ng-click="delete(card)">
-                    <i class="material-icons">close</i>
-                  </button>
-                </div>
-            </div>
+  <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" ng-class="{'v': showBar,'h':!showBar}"></div>
+  <div class="mdl-grid">
+    <div ng-repeat="card in cards" class="mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+      <div class="demo-card-square mdl-card mdl-shadow--2dp card-relation" ng-show="card.show">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text darkBlue">{{ card.title }}</h2>
         </div>
+        <div class="mdl-card__supporting-text">
+          <div ng-repeat="word in card.data | limitTo: card.limit track by $index">
+            <a class="mdl-color-text--accent" href="/words/{{ word }}">{{ word }}</a>
+          </div>
+        </div>
+        <div class="mdl-card--expand"></div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-class="{'mdl-button--disabled': card.limit > card.data.length}" ng-click="incrLimit(card)">
+            See more
+          </a>
+        </div>
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" ng-click="delete(card)">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+  <div id="error" ng-class="{'v': showError,'h':!showError}">
+    <span id="error-message">{{ error }}</span>
+  </div>
 </div>

@@ -1,24 +1,50 @@
+a, u {
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+}
+
 .card-relation {
-    width: 100%;
-    min-height: 325px;
+  width: 100%;
+  min-height: 325px;
+}
+
+#search {
+  margin:auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#error {
+  margin-top: 350px;
+  width: 100%;
+  text-align: center;
+}
+
+#error-message {
+  color: white;
+  font-size: 30px;
 }
 
 #loading2 {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 #loading {
-    margin: auto;
-    margin-top: 325px;
+  margin: auto;
+  margin-top: 325px;
 }
 
 .h {display: none; }
 .v { display: block; }
 
 body{
-    background-color: #f06292;
+  background-color: #E3F2FD;
 }
 
 .darkBlue{
-    color: #1a237e;
+  color: #1a237e;
 }
