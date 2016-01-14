@@ -18,12 +18,17 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope', '$http','
         for (var key in association) {
             $scope.cards.push({
                 "title" : jsonRelations[key] || "Reliation non défini",
-                "data" : association[key]
+                "data" : association[key],
+                "show" : true
             });
         }
 	});
 
     $scope.tagline = 'Nothing beats a pocket protector!';
 
+    $scope.delete = function(card) {
+        return card.show = false;
+    };
     // TODO Mettre une barre de chargement temps indéterminé
+
 }]);
