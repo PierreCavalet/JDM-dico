@@ -37,6 +37,5 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope',
     $scope.delete = function(card) {
         return card.show = false;
     };
-    // TODO Mettre une barre de chargement temps indéterminé
 
 }]);
