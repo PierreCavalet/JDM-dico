@@ -7,7 +7,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'MainController'
         })
 
-        .when('/words', {
+        .when('/words/:word', {
             templateUrl: 'views/word.html',
             controller: 'WordController'
         });

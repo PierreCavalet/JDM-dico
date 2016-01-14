@@ -1,9 +1,9 @@
-angular.module('WordCtrl', []).controller('WordController', function($scope, $http) {
+angular.module('WordCtrl', []).controller('WordController', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
     var jsonRelations;
 	$http.get('/relations.json').then(function(response) {
 		jsonRelations = response.data;
 	});
-	$http.get('/api/words/chat').then(function(response) {
+	$http.get('/api/words/' + $routeParams.word).then(function(response) {
 		jsonWord = response.data;
 
         var association = [];
@@ -25,4 +25,5 @@ angular.module('WordCtrl', []).controller('WordController', function($scope, $ht
 
     $scope.tagline = 'Nothing beats a pocket protector!';
 
-});
+    // TODO Mettre une barre de chargement temps indéterminé
+}]);
