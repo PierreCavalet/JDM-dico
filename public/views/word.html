@@ -1,4 +1,5 @@
 <div class="jumbotron text-center">
+    <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" ng-class="{'v': showBar,'h':!showBar}"></div>
     <div class="mdl-grid">
         <div ng-repeat="card in cards" class="mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
             <div class="demo-card-square mdl-card mdl-shadow--2dp card-relation" ng-show="card.show">

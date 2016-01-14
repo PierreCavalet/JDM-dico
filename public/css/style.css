@@ -3,6 +3,14 @@
     min-height: 325px;
 }
 
+#loading {
+    margin: auto;
+    margin-top: 325px;
+}
+
+.h {display: none; }
+.v { display: block; }
+
 body{
     background-color: #f06292;
 }

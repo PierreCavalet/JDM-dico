@@ -1,5 +1,6 @@
 angular.module('WordCtrl', []).controller('WordController', ['$scope', '$rootScope', '$http','$routeParams', function($scope, $rootScope, $http, $routeParams) {
     var jsonRelations;
+    $scope.showBar = false;
 	$http.get('/relations.json').then(function(response) {
 		jsonRelations = response.data;
 	});
@@ -16,6 +17,7 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope', '$rootSco
           association[value.association.type].push(value.mot);
         });
 
+        $scope.showBar = true;
         $scope.cards = [];
         for (var key in association) {
             $scope.cards.push({
