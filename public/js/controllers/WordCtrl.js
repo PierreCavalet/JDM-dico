@@ -21,11 +21,17 @@ angular.module('WordCtrl', []).controller('WordController', function($scope, $ht
         for (var key in association) {
             $scope.cards.push({
                 "title" : key,
-                "data" : association[key]
+                "data" : association[key],
+                "show" : true
             });
         }
 	});
 
     $scope.tagline = 'Nothing beats a pocket protector!';
+
+    $scope.delete = function(card) {
+        alert("Deleting the " + card.title);
+        return card.show = false;
+    };
 
 });
