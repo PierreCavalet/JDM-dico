@@ -3,6 +3,10 @@
     min-height: 325px;
 }
 
+#loading2 {
+    margin-top: 100px;
+}
+
 #loading {
     margin: auto;
     margin-top: 325px;

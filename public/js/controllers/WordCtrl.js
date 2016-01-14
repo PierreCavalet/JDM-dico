@@ -1,9 +1,13 @@
-angular.module('WordCtrl', []).controller('WordController', ['$scope', '$rootScope', '$http','$routeParams', function($scope, $rootScope, $http, $routeParams) {
+angular.module('WordCtrl', []).controller('WordController', ['$scope',
+ '$rootScope', '$http','$routeParams',
+  function($scope, $rootScope, $http, $routeParams) {
+
     var jsonRelations;
-    $scope.showBar = false;
+    componentHandler.upgradeDom();
 	$http.get('/relations.json').then(function(response) {
 		jsonRelations = response.data;
 	});
+    $rootScope.showBar = true;
 	$http.get('/api/words/' + $routeParams.word).then(function(response) {
 		jsonWord = response.data;
 
@@ -17,7 +21,7 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope', '$rootSco
           association[value.association.type].push(value.mot);
         });
 
-        $scope.showBar = true;
+        $rootScope.showBar = false;
         $scope.cards = [];
         for (var key in association) {
             $scope.cards.push({
