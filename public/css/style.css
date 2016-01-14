@@ -25,7 +25,6 @@ h1 {
 }
 
 #error-message {
-  color: white;
   font-size: 30px;
 }
 
@@ -47,4 +46,20 @@ body{
 
 .darkBlue{
   color: #1a237e;
+}
+
+.cl-very-low {
+  color: #E1BEE7;
+}
+
+.cl-low {
+  color: #BA68C8;
+}
+
+.cl-medium {
+  color: #8E24AA;
+}
+
+.cl-high {
+  color: #4A14BC;
 }

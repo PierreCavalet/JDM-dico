@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                     'git clone git@github.com:PierreCavalet/JDM-dico.git jeuxdemots',
                     'cd jeuxdemots',
                     'npm install',
-                    'bower install',
+                    'bower install --allow-root',
                     'forever stop server.js || true',
                     'forever start server.js',
                     'forever list'

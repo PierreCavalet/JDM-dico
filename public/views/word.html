@@ -8,7 +8,7 @@
         </div>
         <div class="mdl-card__supporting-text">
           <div ng-repeat="word in card.data | limitTo: card.limit track by $index">
-            <a class="mdl-color-text--accent" href="/words/{{ word }}">{{ word }}</a>
+            <a ng-class="{'cl-very-low': word.poids < 30, 'cl-low' : 30 <= word.poids && word.poids < 100, 'cl-medium' : 100 <= word.poids && word.poids < 200, 'cl-high' : 200 <= word.poids}" href="/words/{{ word.texte }}">{{ word.texte }} ({{ word.poids }})</a>
           </div>
         </div>
         <div class="mdl-card--expand"></div>

@@ -1,6 +1,6 @@
 angular.module('WordCtrl', []).controller('WordController', ['$scope','$rootScope',
  '$http','$routeParams', function($scope, $rootScope, $http, $routeParams) {
-
+  $rootScope.mot = $routeParams.word;
   $rootScope.showBar = true;
   $rootScope.showError = false;
   componentHandler.upgradeDom();
@@ -33,13 +33,19 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope','$rootScop
         if(typeof association[value.association.type] === 'undefined') {
           association[value.association.type] = [];
         }
-        association[value.association.type].push(value.mot);
+        association[value.association.type].push({
+            "texte" : value.mot,
+            "poids" : value.association.poids
+        });
       });
       angular.forEach(jsonWord.sortant, function(value, key) {
         if(typeof association[value.association.type] === 'undefined') {
           association[value.association.type] = [];
         }
-        association[value.association.type].push(value.mot);
+        association[value.association.type].push({
+            "texte" : value.mot,
+            "poids" : value.association.poids
+        });
       });
 
       // hide the bar and push the cards
