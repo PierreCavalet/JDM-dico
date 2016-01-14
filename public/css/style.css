@@ -12,5 +12,9 @@
 .v { display: block; }
 
 body{
-    background-color: #f8bbd0;
+    background-color: #f06292;
+}
+
+.darkBlue{
+    color: #1a237e;
 }

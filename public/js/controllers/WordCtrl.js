@@ -1,4 +1,4 @@
-angular.module('WordCtrl', []).controller('WordController', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
+angular.module('WordCtrl', []).controller('WordController', ['$scope', '$rootScope', '$http','$routeParams', function($scope, $rootScope, $http, $routeParams) {
     var jsonRelations;
     $scope.showBar = false;
 	$http.get('/relations.json').then(function(response) {
@@ -7,6 +7,8 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope', '$http','
 	$http.get('/api/words/' + $routeParams.word).then(function(response) {
 		jsonWord = response.data;
 
+        console.log(jsonWord);
+        $rootScope.mot = $routeParams.word;
         var association = [];
         angular.forEach(jsonWord.entrant, function(value, key) {
             if(typeof association[value.association.type] === 'undefined'){
@@ -19,7 +21,7 @@ angular.module('WordCtrl', []).controller('WordController', ['$scope', '$http','
         $scope.cards = [];
         for (var key in association) {
             $scope.cards.push({
-                "title" : jsonRelations[key] || "Reliation non défini",
+                "title" : jsonRelations[key] || "Relation non définie",
                 "data" : association[key],
                 "show" : true
             });
