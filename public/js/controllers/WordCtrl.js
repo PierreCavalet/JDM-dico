@@ -20,7 +20,7 @@ angular.module('WordCtrl', []).controller('WordController', function($scope, $ht
         console.log(association['r_action_lieu']);
         for (var key in association) {
             $scope.cards.push({
-                "title" : key,
+                "title" : jsonRelations[key],
                 "data" : association[key]
             });
         }
