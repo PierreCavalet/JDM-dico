@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', ['$scope', '$location',  function($scope, $location) {
+angular.module('MainCtrl', []).controller('MainController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location) {
     $scope.myFunc = function(keyEvent) {
         if (keyEvent.which === 13) {
             $location.path('/words/' + $scope.searchbar);
