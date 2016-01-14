@@ -5,7 +5,6 @@ angular.module('WordCtrl', []).controller('WordController', function($scope, $ht
 	});
 	$http.get('/api/words/chat').then(function(response) {
 		jsonWord = response.data;
-		console.log(jsonWord);
 
         var association = [];
         angular.forEach(jsonWord.entrant, function(value, key) {
@@ -14,13 +13,11 @@ angular.module('WordCtrl', []).controller('WordController', function($scope, $ht
             };
           association[value.association.type].push(value.mot);
         });
-        console.log(association);
 
-        $scope.cards = ['test'];
-        console.log(association['r_action_lieu']);
+        $scope.cards = [];
         for (var key in association) {
             $scope.cards.push({
-                "title" : jsonRelations[key],
+                "title" : jsonRelations[key] || "Reliation non défini",
                 "data" : association[key]
             });
         }
