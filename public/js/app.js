@@ -1,1 +1,1 @@
-angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'WordCtrl', 'WordService']);
+angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'WordCtrl', 'WordService', 'NavbarDirective']);
