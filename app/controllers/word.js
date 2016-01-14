@@ -1,4 +1,4 @@
-var fs = require('fs');
+var Iconv = require('iconv').Iconv;
 var request = require('request');
 var xml2js = require('xml2js');
 var Word = require('../models/word');
@@ -21,15 +21,22 @@ exports.getWord = function(req, res) {
         } else {
             console.log("word load from jeuxdemots");
             var url = 'http://www.jeuxdemots.org/rezo-xml.php?gotermsubmit=Chercher&output=onlyxml&gotermrel=' + word_mot;
-            request(url, function (error, response, body) {
-                var temp = body.split("<CODE>");
+            request({uri:url, encoding: null}, function (error, response, body) {
+                var iconv = new Iconv('iso-8859-1', 'utf-8');
+                var buffDecode = iconv.convert(body);
+                var stringDecode = buffDecode.toString('utf-8');
+                var temp = stringDecode.split("<CODE>");
 
                 if(temp.length < 2) {
                     res.end();
                 } else {
                     var temp2 = temp[1].split("</CODE>");
-                    var result = temp2[0];
-                    parser.parseString(result, function (err, result) {
+                    var xmlToParse =  temp2[0];
+                    parser.parseString(xmlToParse, function (err, result) {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
 
             			// json cleanup
             			var JSONdata = result.jdm;
